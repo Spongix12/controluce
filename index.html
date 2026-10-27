@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Controluce — Litofanie in cornice stampate in 3D</title>
+  <meta name="description" content="Controluce trasforma la tua foto in una litofania in cornice stampata in 3D.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#top" class="logo" data-i18n-aria="aria.logo">
+      <span class="logo-mark" aria-hidden="true"></span>
+      <span>Controluce</span>
+    </a>
+
+    <nav class="main-nav" id="main-nav">
+      <a href="#crea" data-i18n="nav.create"></a>
+      <a href="#luce" data-i18n="nav.light"></a>
+      <a href="#proporzioni" data-i18n="nav.ratios"></a>
+      <a href="#come-funziona" data-i18n="nav.how"></a>
+      <div class="lang-switch" role="group" data-i18n-aria="aria.lang">
+        <button type="button" data-lang="it" lang="it" aria-label="Italiano">IT</button>
+        <button type="button" data-lang="en" lang="en" aria-label="English">EN</button>
+        <button type="button" data-lang="fr" lang="fr" aria-label="Français">FR</button>
+        <button type="button" data-lang="es" lang="es" aria-label="Español">ES</button>
+      </div>
+    </nav>
+
+
+    <button class="nav-toggle" aria-expanded="false" aria-controls="main-nav" data-i18n-aria="aria.menu">
+      <span></span><span></span>
+    </button>
+
+    <button class="cart-button" data-open-cart data-i18n-aria="aria.openCart">
+      <span data-i18n="cart.button"></span> <span class="cart-count" aria-live="polite">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="hero-text">
+        <p class="eyebrow" data-i18n="hero.eyebrow"></p>
+        <h1 data-i18n-html="hero.title"></h1>
+        <p class="lead" data-i18n="hero.lead"></p>
+        <div class="hero-actions">
+          <a href="#crea" class="btn btn-primary" data-i18n="hero.cta"></a>
+          <a href="#luce" class="btn btn-link" data-i18n="hero.link"></a>
+        </div>
+        <ul class="hero-facts">
+          <li data-i18n-html="hero.fact1"></li>
+          <li data-i18n-html="hero.fact2"></li>
+          <li data-i18n-html="hero.fact3"></li>
+        </ul>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-glow" id="hero-glow" aria-hidden="true"></div>
+        <div class="viewer viewer-hero" id="hero-viewer" data-i18n-aria="hero.viewer"></div>
+        <p class="hero-state" id="hero-state"><span class="pill-dot"></span> <span></span></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="crea" class="section section-dark">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="studio.eyebrow"></p>
+        <h2 data-i18n="studio.title"></h2>
+        <p class="muted" data-i18n="studio.lead"></p>
+      </div>
+
+      <div class="studio">
+        <div class="studio-stage" id="stage">
+          <div class="stage-light" id="stage-light" aria-hidden="true"></div>
+          <div class="viewer viewer-studio" id="studio-viewer" data-i18n-aria="studio.viewer"></div>
+          <div class="stage-drop" aria-hidden="true" data-i18n="studio.drop"></div>
+          <div class="stage-tools">
+            <button type="button" class="pill" id="light-toggle" aria-pressed="true">
+              <span class="pill-dot" aria-hidden="true"></span> <span></span>
+            </button>
+            <span class="hint" data-i18n="studio.hint"></span>
+          </div>
+          <span class="stage-badge" id="stage-badge" data-i18n="studio.badge"></span>
+        </div>
+
+        <div class="studio-panel">
+          <input type="file" id="photo-input" accept="image/*" class="visually-hidden">
+          <label for="photo-input" class="upload-btn" id="upload-btn">
+            <span class="upload-icon" aria-hidden="true">+</span>
+            <span>
+              <strong id="upload-title"></strong>
+              <small id="upload-sub"></small>
+            </span>
+          </label>
+
+          <div class="control">
+            <div class="control-head">
+              <span class="control-label" data-i18n="studio.crop"></span>
+              <span class="hint" data-i18n="studio.cropHint"></span>
+            </div>
+            <div class="crop" id="crop" style="--ratio: 3 / 4">
+              <canvas id="crop-canvas" width="600" height="800" data-i18n-aria="studio.cropAria"></canvas>
+              <div class="grid-overlay" aria-hidden="true"></div>
+            </div>
+            <div class="zoom-row">
+              <label for="zoom" class="hint" data-i18n="studio.zoom"></label>
+              <input type="range" id="zoom" min="1" max="3" step="0.01" value="1">
+            </div>
+          </div>
+
+          <div class="control">
+            <span class="control-label" data-i18n="studio.orientation"></span>
+            <div class="choice-row" id="orientation">
+              <button type="button" class="choice" data-value="portrait" aria-pressed="true">
+                <span class="choice-icon" style="width:13px;height:19px"></span> <span data-i18n="studio.portrait"></span>
+              </button>
+              <button type="button" class="choice" data-value="landscape" aria-pressed="false">
+                <span class="choice-icon" style="width:19px;height:13px"></span> <span data-i18n="studio.landscape"></span>
+              </button>
+            </div>
+          </div>
+
+          <div class="control">
+            <span class="control-label" data-i18n="studio.ratio"></span>
+            <div class="ratio-row" id="ratios"></div>
+          </div>
+
+          <div class="studio-footer">
+            <div>
+              <span class="hint" data-i18n="studio.price"></span>
+              <p class="price" id="price"></p>
+            </div>
+            <div class="stepper" role="group" data-i18n-aria="studio.qty">
+              <button type="button" id="qty-dec" data-i18n-aria="studio.dec">−</button>
+              <output id="qty" aria-live="polite">1</output>
+              <button type="button" id="qty-inc" data-i18n-aria="studio.inc">+</button>
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary btn-block" id="add" disabled></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="luce" class="section">
+    <div class="container light-section">
+      <div class="light-text">
+        <p class="eyebrow" data-i18n="light.eyebrow"></p>
+        <h2 data-i18n-html="light.title"></h2>
+        <p class="muted" data-i18n="light.text"></p>
+        <div class="thickness-scale" aria-hidden="true">
+          <span>0,8 mm</span><div class="thickness-bar"></div><span>3 mm</span>
+        </div>
+      </div>
+      <div class="compare">
+        <canvas id="compare-canvas" width="900" height="600" data-i18n-aria="light.compare"></canvas>
+        <input type="range" id="compare-range" min="0" max="100" value="50" data-i18n-aria="light.range">
+        <span class="compare-label compare-left" data-i18n="light.off"></span>
+        <span class="compare-label compare-right" data-i18n="light.on"></span>
+        <div class="compare-handle" id="compare-handle" aria-hidden="true"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="proporzioni" class="section section-soft">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="ratios.eyebrow"></p>
+        <h2 data-i18n="ratios.title"></h2>
+      </div>
+      <div class="ratio-cards" id="ratio-cards"></div>
+    </div>
+  </section>
+
+  <section id="come-funziona" class="section">
+    <div class="container">
+      <div class="section-head">
+        <p class="eyebrow" data-i18n="how.eyebrow"></p>
+        <h2 data-i18n="how.title"></h2>
+      </div>
+      <ol class="steps">
+        <li><span class="step-n">01</span><h3 data-i18n="how.s1t"></h3><p data-i18n="how.s1p"></p></li>
+        <li><span class="step-n">02</span><h3 data-i18n="how.s2t"></h3><p data-i18n="how.s2p"></p></li>
+        <li><span class="step-n">03</span><h3 data-i18n="how.s3t"></h3><p data-i18n="how.s3p"></p></li>
+        <li><span class="step-n">04</span><h3 data-i18n="how.s4t"></h3><p data-i18n="how.s4p"></p></li>
+      </ol>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <p class="footer-brand">Controluce</p>
+    <p class="footer-muted" data-i18n="footer.tagline"></p>
+    <p class="footer-contacts" id="footer-contacts"></p>
+  </div>
+</footer>
+
+<!-- Richiesta -->
+<div class="drawer-backdrop" data-close-cart hidden></div>
+<aside class="drawer" id="cart" role="dialog" aria-modal="true" aria-labelledby="cart-title" hidden>
+  <div class="drawer-head">
+    <h2 id="cart-title" data-i18n="drawer.title"></h2>
+    <button class="icon-btn" data-close-cart data-i18n-aria="drawer.close">×</button>
+  </div>
+  <div class="drawer-body">
+    <ul class="cart-items" id="cart-items"></ul>
+    <p class="cart-empty" id="cart-empty" data-i18n-html="drawer.empty"></p>
+
+    <form class="order-form" id="order-form" novalidate>
+      <div class="cart-total"><span data-i18n="form.total"></span><strong id="cart-total">0 €</strong></div>
+
+      <label class="field"><span data-i18n="form.name"></span><input type="text" name="name" autocomplete="name" required></label>
+      <label class="field"><span data-i18n="form.contact"></span><input type="text" name="contact" autocomplete="tel" required></label>
+      <div class="field">
+        <span data-i18n="form.delivery"></span>
+        <div class="segmented" id="delivery">
+          <button type="button" data-value="pickup" aria-pressed="true" data-i18n="form.pickup"></button>
+          <button type="button" data-value="shipping" aria-pressed="false" data-i18n="form.shipping"></button>
+        </div>
+      </div>
+      <label class="field"><span data-i18n-html="form.notes"></span><textarea name="notes" rows="3" data-i18n-ph="form.notesPh"></textarea></label>
+
+      <p class="form-error" id="form-error" role="alert"></p>
+      <div class="send-actions">
+        <button type="submit" class="btn btn-primary" data-channel="whatsapp" data-i18n="form.whatsapp"></button>
+        <button type="submit" class="btn btn-outline" data-channel="email" data-i18n="form.email"></button>
+      </div>
+      <p class="hint" data-i18n="form.hint"></p>
+    </form>
+  </div>
+</aside>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.149.0/examples/js/controls/OrbitControls.js"></script>
+<script src="i18n.js"></script>
+<script src="litho3d.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
